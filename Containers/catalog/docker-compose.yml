@@ -1,0 +1,6 @@
+web:
+  build: ./app 
+  ports:
+   - "2002:2002"  
+  volumes:
+   - .:/code

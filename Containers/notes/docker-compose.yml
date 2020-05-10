@@ -1,0 +1,6 @@
+web:
+  build: ./app 
+  ports:
+   - "2003:2003"  
+  volumes:
+   - .:/code

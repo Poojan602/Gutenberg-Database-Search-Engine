@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="jumbotron text-center">
+  		<h2>Welcome to Author and Book Database</h2>
+	</div>
+	<br>
+	<div class="text-center">
+		<form class="form-inline" action="/" method="post">
+			<div class="form-group">
+				<div class="inline">
+					<span class="text-primary">Search by</span> &emsp;
+					<select id="search_tag" class="form-control" name="search_type">
+						<option value="Author">Author</option>
+						<option value="Book">Book</option>
+					</select>
+					&emsp; &emsp; <input id="search_item" type="text" class="form-control" name="Search_Item" required>
+					&emsp; &emsp; <input type="Submit" class="btn btn-primary" value="Search">
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<br><br><br>
+
+	{% if abflag == True %}
+	<div class="text-center" style="overflow: auto; height: 200px;">
+		<h3>Search result for : {{ word }}</h3> <br>
+		<table class="table table-bordered" style="width:800px; border: 2px solid black;margin-left:auto;margin-right:auto">
+    		<thead>
+    		  <tr class="info">
+    		    <th style="text-align: center">Author</th>
+    		    <th style="text-align: center">Book</th>
+    		  </tr>
+    		</thead>
+    		<tbody>
+    		{% for d in data %}
+    		  <tr>
+    		    <td>{{ d.Author }}</td>
+    		    <td>{{ d.Book }}</td>
+    		  </tr>
+    		{% endfor %}
+    		</tbody>
+ 	 	</table>
+	</div>
+	{% endif %}	
+
+	{% if abflag == True or notesubmittedflag == True or notesfoundflag == True or notesfoundflag == False %}
+	<div class="text-center">
+		<div class="row">
+			<div class="col-sm-10">
+				<h3>Note for word : {{ word }}</h3>
+			</div>
+		</div>
+		<div class="form-group row">
+			<form action="/submitnote" method="post">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-4">
+					<textarea id="note" rows="5" class="form-control" style="resize: none;" name="notes"></textarea>
+				</div>
+					<input type="hidden" value="{{ word }}" name="search_word" />
+				<div class="col-sm-2">
+					<br>
+					&emsp;<input type="submit" class="btn btn-danger" value="Submit Note">
+			</form>
+			<form action="/retrievenotes" method="post">
+				<br>  <input type="hidden" value="{{ word }}" name="search_word" />
+				&emsp;<input type="submit" class="btn btn-success" value="Retrieve Notes">
+			</form>
+			</div>
+		</div>
+	</div>
+
+	{% if notesubmittedflag == True %}
+	<div class="text-center">
+		<h2 class="text-warning">{{ submitresponse }}</h2>	
+	</div>
+	{% endif %}
+	
+	<br><br>
+
+	{% if notesfoundflag == True %}
+	<div class="text-center" style="overflow: auto; height: 200px;">
+		<table class="table table-bordered" style="width:800px; border: 2px solid black;margin-left:auto;margin-right:auto">
+    		<thead>
+    		  <tr class="warning">
+    		    <th style="text-align: center">Word</th>
+    		    <th style="text-align: center">Note</th>
+    		  </tr>
+    		</thead>
+    		<tbody>
+    		{% for n in notes %}
+    		  <tr>
+    		    <td>{{ word }}</td>
+    		    <td>{{ n.Note }}</td>
+    		  </tr>
+    		{% endfor %}
+    		</tbody>
+ 	 	</table>
+	</div>
+	{% endif %}
+
+		{% if notesfoundflag == False %}
+			<div class="text-center">
+				<h2 class="text-warning">{{ submitresponse }}</h2>	
+			</div>
+		{% endif %}
+
+	{% endif %}
+
+	{% if abflag == False %}
+	<div class="text-center">
+		<h3>No records found</h3>
+	</div>
+	{% endif %}
+
+</body>
+</html>
