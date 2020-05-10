@@ -33,6 +33,10 @@ WebApplication to search books by author name or book name deployment in docker 
 - Microservices were created for Log, Catalog, MainAPI and Notes and were dockerised using flask in python
 - Microservices can be found in Containers folder
 - All the interactions are made through Main API
+
+## Docker
+
+- Docker was installed on AWS ec2 instance
 - All the Dockerised microservices were deployed on AWS ec2 instance
 
 ## Webpage
@@ -40,6 +44,7 @@ WebApplication to search books by author name or book name deployment in docker 
 - Webpage was created using standard HTML, CSS, and Bootstrap
 - Backend for the webpage was also created in python flask which was responsible to call the microservice.
 - Both Frontend and Backend code can be found under the folder Website
+- Webpage was hosted on AWS ec2 instance using nginx and gunicorn.
 
 ## Testing
 
@@ -47,8 +52,6 @@ WebApplication to search books by author name or book name deployment in docker 
 - Testing files can be found under the folder name Testing
 - Though all the validations were taken into account, frontend testing was done manually. 
 
+## Screenshots
 
-
-
-
-
+- Images of website, docker running on AWS ec2, data insertion in MongoDB etc. can be found in folder named Screen shots
